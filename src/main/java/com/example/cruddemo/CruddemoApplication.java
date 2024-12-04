@@ -21,7 +21,76 @@ public class CruddemoApplication {
 			// createStudent(studentDAO);
 
 			createMultipleStudents(studentDAO);
+
+			// findStudent(studentDAO);
+
+			// queryForStudents(studentDAO);
+
+			// queryForStudentsByLastName(studentDAO);
+
+			// updateStudent(studentDAO);
+
+			// deleteStudent(studentDAO);
 		};
+
+	}
+
+	private void deleteStudent(StudentDAO studentDAO) {
+		int studentId = 1;
+		Student myStudent = studentDAO.findById(studentId);
+
+		System.out.println("Deleting student: " + myStudent);
+		studentDAO.deleteById(studentId);
+
+		System.out.println("Deleted student: " + myStudent);
+
+	}
+
+	private void updateStudent(StudentDAO studentDAO) {
+		int studentId = 1;
+		Student myStudent = studentDAO.findById(studentId);
+
+		System.out.println("Updating student: " + myStudent);
+		myStudent.setFirstName("John");
+
+		studentDAO.update(myStudent);
+
+		System.out.println("Updated student: " + myStudent);
+
+	}
+
+	private void queryForStudentsByLastName(StudentDAO studentDAO) {
+		// display the students
+		System.out.println("Displaying the students by last name");
+		studentDAO.findByLastName("Doe").forEach(System.out::println);
+
+	}
+
+	private void queryForStudents(StudentDAO studentDAO) {
+		// display the students
+		System.out.println("Displaying the students");
+		studentDAO.findAll().forEach(System.out::println);
+
+	}
+
+	private void findStudent(StudentDAO studentDAO) {
+		// create a student
+		System.out.println("Creating a new student");
+		Student tempStudent = new Student("Paul", "Wall", "pw@gmail.com");
+
+		// save the student
+		System.out.println("Saving the student");
+		studentDAO.save(tempStudent);
+
+		// display the student
+		System.out.println("Saved student: " + tempStudent.getId());
+
+		// find the student
+		System.out.println("Finding the student");
+		Student myStudent = studentDAO.findById(tempStudent.getId());
+
+		// display the student
+		System.out.println("Found student: " + myStudent);
 
 	}
 
